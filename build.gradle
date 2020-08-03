@@ -1,8 +1,6 @@
-apply plugin: 'java-library'
-
-group = 'net.arnx'
-archivesBaseName = 'wmf2svg'
-version = '0.9.9'
+plugins {
+	id 'java-library'
+}
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -32,29 +30,18 @@ compileTestJava {
 	options.encoding = 'UTF-8'
 }
 
+group = 'net.arnx'
+archivesBaseName = 'wmf2svg'
+version = '0.9.9'
+
 jar {
     manifest {
         attributes('Implementation-Title': archivesBaseName,
                    'Implementation-Version': project.version)
     }
+
 	exclude("android/")
 	exclude("com/")
-}
-
-javadoc {
-	options {
-		links 'https://docs.oracle.com/javase/6/docs/api/'
-		locale = 'en_US'
-		encoding = 'UTF-8'
-		docEncoding = 'UTF-8'
-		charSet = 'UTF-8'
-		author = true
-	}
-}
-
-task javadocJar(type: Jar) {
-	// classifier = 'javadoc'
-	// from javadoc
 }
 
 task sourcesJar(type: Jar) {
@@ -64,8 +51,4 @@ task sourcesJar(type: Jar) {
 
 tasks.withType(Test).each { task ->
     task.enabled = false
-}
-
-artifacts {
-	archives sourcesJar
 }
